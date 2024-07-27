@@ -4,9 +4,7 @@ This is a React Library Created by Ptolemy2002's [cra-template-react-library](ht
 For now, the library makes use of React 18 and does not use TypeScript.
 
 ## Peer Dependencies
-These should be installed in order to use the library, as npm does not automatically add peer dependencies to your project.
-- @types/is-callable: ^1.1.2
-- is-callable: ^1.2.7
+This project does not have any peer dependencies, so it should work out of the box.
 
 ## Commands
 The following commands exist in the project:

@@ -26,10 +26,7 @@
     },
     "description": "Utilities for working with lists and objects",
     "license": "ISC",
-    "peerDependencies": {
-        "@types/is-callable": "~1.1.2",
-        "is-callable": "^1.2.7"
-    },
+    "peerDependencies": {},
     "devDependencies": {
         "esbuild": "^0.23.0"
     }
