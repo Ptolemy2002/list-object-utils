@@ -5,10 +5,8 @@ For now, the library makes use of React 18 and does not use TypeScript.
 
 ## Peer Dependencies
 These should be installed in order to use the library, as npm does not automatically add peer dependencies to your project.
-- @types/react: ^18.3.3
-- @types/react-dom: ^18.3.0
-- react: ^18.3.1
-- react-dom: ^18.3.1
+- @types/is-callable: ^1.1.2
+- is-callable: ^1.2.7
 
 ## Commands
 The following commands exist in the project:
