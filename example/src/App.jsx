@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import isCallable from 'is-callable';
-import { listsEqual, objectsEqual, listSwap, listRemove, listPush, listSet, isSet, listDifference, objectDifference, sortWithIndeces, objectToString } from '@ptolemy2002/list-object-utils';
+import {
+    listsEqual, objectsEqual, listSwap, listRemove, listPush, listSet, isSet, listDifference, objectDifference, flattenKeys, sortWithIndeces, objectToString
+} from '@ptolemy2002/list-object-utils';
 
 function symmetricTest(f, a, b, e) {
     const r1 = isCallable(e) ? e(f(a, b)) : f(a, b) === e;
@@ -22,7 +24,9 @@ function App() {
     const [list2, setList2] = useState([]);
     const [index1, setIndex1] = useState(0);
     const [index2, setIndex2] = useState(0);
+    const [obj, setObj] = useState({});
     const [error, setError] = useState(null);
+    const [objError, setObjError] = useState(null);
 
     function handleListChange(setter) {
         return (e) => {
@@ -40,6 +44,17 @@ function App() {
             
             setError(null);
             setter(parseInt(v));
+        }
+    }
+
+    function handleObjChange(setter) {
+        return (e) => {
+            try {
+                setter(JSON.parse(e.target.value));
+                setObjError(null);
+            } catch (e) {
+                setObjError("Invalid JSON");
+            }
         }
     }
 
@@ -62,7 +77,7 @@ function App() {
             <input type="text" name="index2" defaultValue={index2} onChange={handleIndexChange(setIndex2)} />
             <br />
 
-            {error && <><p className="text-danger">{error}</p><br /></>}
+            {error && <><span className="text-danger">{error}</span><br /></>}
 
             {
                 !error && <p>
@@ -81,6 +96,18 @@ function App() {
                     List 2 is set? {isSet(list2).toString()} <br /> <br />
 
                     List difference: {objectToString(listDifference(list1, list2))} <br />
+                </p>
+            }
+
+            <label>Object (JSON): </label>
+            <input type="text" name="obj" defaultValue={JSON.stringify(obj)} onChange={handleObjChange(setObj)} />
+            <br />
+
+            {objError && <><span className="text-danger">{objError}</span><br /></>}
+
+            {
+                !objError && <p>
+                    Flattened keys: {objectToString(flattenKeys(obj))}
                 </p>
             }
 
