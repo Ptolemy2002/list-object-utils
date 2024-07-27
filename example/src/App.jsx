@@ -37,8 +37,8 @@ function App() {
     function handleIndexChange(setter) {
         return (e) => {
             const v = e.target.value;
-            if (v === "" || isNaN(v) || v.includes('.') || v < 0 || v >= Math.min(list1.length, list2.length)) {
-                setError(`Specify an integer between 0 and ${Math.min(list1.length, list2.length) - 1} (length of shortest list - 1) for field ${e.target.name}`);
+            if (v === "" || isNaN(v) || v.includes('.') || v < 0 || (v !== "0" && v >= Math.min(list1.length, list2.length, 1))) {
+                setError(`Specify an integer between 0 and ${Math.min(list1.length, list2.length, 1) - 1} (length of shortest list - 1) for field ${e.target.name}`);
                 return;
             }
             
@@ -155,7 +155,6 @@ function App() {
 
                 Difference between empty objects (expecting empty object): {symmetricTest(objectDifference, {}, {}, (v) => Object.keys(v).length === 0)} <br />
                 Difference between empty objects within list (expecting empty object): {symmetricTest(listDifference, [{}], [{}], (v) => {
-                    console.log(v);
                     return Object.keys(v).length === 0
                 })} <br />
                 Difference between same objects (expecting empty object): {symmetricTest(objectDifference, {a: 1}, {a: 1}, (v) => Object.keys(v).length === 0)} <br /> <br />
