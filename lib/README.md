@@ -148,8 +148,7 @@ A simple implementation of `JSON.stringify` that converts undefined values to `n
 `String` - The string representation of the object.
 
 ## Meta
-This is a React Library Created by Ptolemy2002's [cra-template-react-library](https://www.npmjs.com/package/@ptolemy2002/cra-template-react-library) template in combination with [create-react-app](https://www.npmjs.com/package/create-react-app). It contains methods of building and publishing your library to npm.
-For now, the library makes use of React 18 and does not use TypeScript.
+This is a React Library Created by Ptolemy2002's [cra-template-react-library](https://www.npmjs.com/package/@ptolemy2002/cra-template-react-library) template in combination with [create-react-app](https://www.npmjs.com/package/create-react-app). However, it does not actually depend on React - it has been modified to work out of the box. It contains methods of building and publishing your library to npm.
 
 ## Peer Dependencies
 This project does not have any peer dependencies, so it should work out of the box.
