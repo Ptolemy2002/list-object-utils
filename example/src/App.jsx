@@ -83,17 +83,25 @@ function App() {
                 !error && <p>
                     Lists equal? {listsEqual(list1, list2).toString()} <br /> <br />
 
-                    List 1 swap: {listSwap(list1, index1, index2).join(',')} <br />
-                    List 1 remove: {listRemove(list1, index1).join(',')} <br />
-                    List 1 push: {listPush(list1, 'new').join(',')} <br />
-                    List 1 set: {listSet(list1, index1, 'new').join(',')} <br />
-                    List 1 is set? {isSet(list1).toString()} <br /> <br />
+                    {
+                        list1.length > 0 && <>
+                            List 1 swap: {listSwap(list1, index1, index2).join(',')} <br />
+                            List 1 remove: {listRemove(list1, index1).join(',')} <br />
+                            List 1 push: {listPush(list1, 'new').join(',')} <br />
+                            List 1 set: {listSet(list1, index1, 'new').join(',')} <br />
+                            List 1 is set? {isSet(list1).toString()} <br /> <br />
+                        </>
+                    }
 
-                    List 2 swap: {listSwap(list2, index1, index2).join(',')} <br />
-                    List 2 remove: {listRemove(list2, index1).join(',')} <br />
-                    List 2 push: {listPush(list2, 'new').join(',')} <br />
-                    List 2 set: {listSet(list2, index1, 'new').join(',')} <br />
-                    List 2 is set? {isSet(list2).toString()} <br /> <br />
+                    {
+                        list2.length > 0 && <>
+                            List 2 swap: {listSwap(list2, index1, index2).join(',')} <br />
+                            List 2 remove: {listRemove(list2, index1).join(',')} <br />
+                            List 2 push: {listPush(list2, 'new').join(',')} <br />
+                            List 2 set: {listSet(list2, index1, 'new').join(',')} <br />
+                            List 2 is set? {isSet(list2).toString()} <br /> <br />
+                        </>
+                    }
 
                     List difference: {objectToString(listDifference(list1, list2))} <br />
                 </p>

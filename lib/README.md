@@ -2,11 +2,18 @@
 This library contains utilities for working with lists and objects in JavaScript.
 
 The functions are not exported as default, so you can import them in one of the following ways:
-```
+```javascript
 // ES6
 import { functionName } from '@ptolemy2002/list-object-utils';
 // CommonJS
 const { functionName } = require('@ptolemy2002/list-object-utils');
+```
+
+## Type Reference
+```typescript
+type ArrayOptional = any[] | null | undefined;
+type ObjectOptional = Object | null | undefined;
+type SortCallback = (a: number, b: number) => number;
 ```
 
 ## Functions
@@ -14,103 +21,103 @@ The following functions are available in the library:
 
 ### listsEqual
 #### Description
-Checks if two lists are equal to each other. Uses recursion to check nested lists and the `objectsEqual` function to check nested objects. If either of the operands is not an array, the function will return `false`.
+Checks if two lists are equal to each other. Uses recursion to check nested lists and the `objectsEqual` function to check nested objects. If either of the operands is not a list, the function will be equivalent to a simple equality check.
 
 #### Parameters
-- `a` (Array): The first list to be compared.
-- `b` (Array): The second list to be compared.
+- `a` (`ArrayOptional`): The first list to be compared.
+- `b` (`ArrayOptional`): The second list to be compared.
 
 #### Returns
-`Boolean` - `true` if the lists are equal, `false` otherwise.
+`boolean` - `true` if the lists are equal, `false` otherwise.
 
 ### objectsEqual
 #### Description
-Checks if two objects are equal to each other. Uses recursion to check nested objects and the `listsEqual` function to check nested lists. If either of the operands is not an object, the function will return `false`. This check also applies to arrays.
+Checks if two objects are equal to each other. Uses recursion to check nested objects and the `listsEqual` function to check nested lists. If either of the operands is not an object, the function will be equivalent to a simple equality check.
 
 #### Parameters
-- `a` (Object): The first object to be compared.
-- `b` (Object): The second object to be compared.
+- `a` (`ObjectOptional`): The first object to be compared.
+- `b` (`ObjectOptional`): The second object to be compared.
 
 #### Returns
-`Boolean` - `true` if the objects are equal, `false` otherwise.
+`boolean` - `true` if the objects are equal, `false` otherwise.
 
-### listSwap
+### listSwap<T>
 #### Description
-Swaps two elements in a list based on the provided indices.
+Swaps two elements in a list based on the provided indices. Throws a `TypeError` if the indices are not integers and a `RangeError` if the indices are out of bounds.
 
 #### Parameters
-- `list` (Array): The list in which the elements are to be swapped.
-- `i` (Number): The index of the first element to be swapped.
-- `j` (Number): The index of the second element to be swapped.
+- `list` (`T[]`): The list in which the elements are to be swapped.
+- `i` (`number`): The index of the first element to be swapped.
+- `j` (`number`): The index of the second element to be swapped.
 
 #### Returns
-`Array` - The list with the elements swapped.
+`T[]` - The list with the elements swapped.
 
-### listRemove
+### listRemove<T>
 #### Description
-Removes an element from a list based on the provided index.
+Removes an element from a list based on the provided index. Throws a `TypeError` if the index is not an integer and a `RangeError` if the index is out of bounds.
 
 #### Parameters
-- `list` (Array): The list from which the element is to be removed.
-- `i` (Number): The index of the element to be removed.
+- `list` (`T[]`): The list from which the element is to be removed.
+- `i` (`number`): The index of the element to be removed.
 
 #### Returns
-`Array` - The list with the element removed.
+`T[]` - The list with the element removed.
 
-### listPush
+### listPush<T>
 #### Description
 Pushes an element to a list based on the provided index.
 
 #### Parameters
-- `list` (Array): The list to which the element is to be pushed.
-- `element` (Any): The element to be pushed.
+- `list` (`T[]`): The list to which the element is to be pushed.
+- `element` (`T`): The element to be pushed.
 
 #### Returns
-`Array` - The list with the element pushed.
+`T[]` - The list with the element pushed.
 
-### listSet
+### listSet<T>
 #### Description
-Sets an element in a list based on the provided index.
+Sets an element in a list based on the provided index. Throws a `TypeError` if the index is not an integer and a `RangeError` if the index is out of bounds.
 
 #### Parameters
-- `list` (Array): The list in which the element is to be set.
-- `i` (Number): The index of the element to be set.
-- `element` (Any): The element to be set.
+- `list` (`T[]`): The list in which the element is to be set.
+- `i` (`number`): The index of the element to be set.
+- `element` (`T`): The element to be set.
 
 #### Returns
-`Array` - The list with the element set.
+`T[]` - The list with the element set.
 
 ### isSet
 #### Description
-Checks if a list is a set, that is, it has no duplicate elements.
+Checks if a list is a set, that is, it has no duplicate elements. Element identity is determined using `Array.includes`.
 
 #### Parameters
-- `list` (Array): The list to be checked.
+- `list` (`any[]`): The list to be checked.
 
 #### Returns
-`Boolean` - `true` if the list is a set, `false` otherwise.
+`boolean` - `true` if the list is a set, `false` otherwise.
 
 ### listDifference
 #### Description
-Finds the difference between two lists, that is, the elements that do not match between the two lists. If one list has a different value at an index than the other list at the same index, the element from the second list will be included in the result. Uses recursion to check nested lists and the `objectDifference` function to check nested objects.
+Finds the difference between two lists, that is, the elements that do not match between the two lists. If one list has a different value at an index than the other list at the same index, the element from the second list will be included in the result. Uses recursion to check nested lists and the `objectDifference` function to check nested objects. If either of the operands is not a list, the function will return an empty object if the operands are equal and the second operand if they are not.
 
 #### Parameters
-- `a` (Array): The first list to be compared.
-- `b` (Array): The second list to be compared.
+- `a` (`ArrayOptional`): The first list to be compared.
+- `b` (`ArrayOptional`): The second list to be compared.
 
 #### Returns
-`Object` - An object with a property for every index at which the two lists differ. The value for each property is the element from the second list.
+`ObjectOptional` - If the operands are both lists, an object with a property for every index at which the two lists differ. The value for each property is the element from the second list. If the operands are not both lists and equal, an empty object. If the operands are not both lists and not equal, the second operand.
 
 ### objectDifference
 #### Description
-Finds the difference between two objects, that is, the properties that do not match between the two objects. If one object has a different value for a property than the other object for the same property, the value from the second object will be included in the result. Uses recursion to check nested objects and the `listDifference` function to check nested lists.
+Finds the difference between two objects, that is, the properties that do not match between the two objects. If one object has a different value for a property than the other object for the same property, the value from the second object will be included in the result. Uses recursion to check nested objects and the `listDifference` function to check nested lists. If either of the operands is not an object, the function will return an empty object if the operands are equal and the second operand if they are not.
 
 #### Parameters
-- `a` (Object): The first object to be compared.
-- `b` (Object): The second object to be compared.
+- `a` (`ObjectOptional`): The first object to be compared.
+- `b` (`ObjectOptional`): The second object to be compared.
 
 #### Returns
-`Object` - An object with a property for every property that differs between the two objects. The value for each property is the value from the second object.
+`ObjectOptional` - If the operands are both objects, an object with a property for every key at which the two objects differ. The value for each property is the value from the second object. If the operands are not both objects and equal, an empty object. If the operands are not both objects and not equal, the second operand.
 
 ### flattenKeys
 #### Description
@@ -119,36 +126,33 @@ For an object that contains properties that are also objects, this function will
 Note that empty lists and empty objects are left as-is.
 
 #### Parameters
-- `obj` (Object): The object to be flattened.
-- `prefix` (String): The prefix to be added to the keys. Default is an empty string.
+- `obj` (`Object`): The object to be flattened.
+- `prefix` (`string`): The prefix to be added to the keys. Default is an empty string.
 
 #### Returns
 `Object` - The object with the keys flattened.
 
-### sortWithIndices
+### sortWithIndices<T>
 #### Description
 Sorts a list based on the callback provided. The difference between this function and the native `sort` function is that this function specifies the indices of the elements to the callback instead of the elements themselves.
 
 #### Parameters
-- `list` (Array): The list to be sorted.
-- `sort` (Function): The callback function that will be used to sort the list. It should take two arguments, which are the indices of the elements to be compared.
-- `descending` (Boolean): If `true`, the list will be sorted in descending order. Default is `false`.
+- `list` (`T[]`): The list to be sorted.
+- `sort` (`SortCallback`): The callback function that will be used to sort the list. It should take two arguments, which are the indices of the elements to be compared.
+- `descending` (`boolean`): If `true`, the list will be sorted in descending order. Default is `false`.
 
 #### Returns
-`Array` - The sorted list.
+`T[]` - The list sorted based on the callback and the `descending` parameter.
 
 ### objectToString
 #### Description
 A simple implementation of `JSON.stringify` that converts undefined values to `null`.
 
 #### Parameters
-- `obj` (Object): The object to be converted to a string.
+- `obj` (`Object`): The object to be converted to a string.
 
 #### Returns
-`String` - The string representation of the object.
-
-## Meta
-This is a React Library Created by Ptolemy2002's [cra-template-react-library](https://www.npmjs.com/package/@ptolemy2002/cra-template-react-library) template in combination with [create-react-app](https://www.npmjs.com/package/create-react-app). However, it does not actually depend on React - it has been modified to work out of the box. It contains methods of building and publishing your library to npm.
+`string` - The string representation of the object.
 
 ## Peer Dependencies
 This project does not have any peer dependencies, so it should work out of the box.

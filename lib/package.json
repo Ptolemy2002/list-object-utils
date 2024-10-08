@@ -1,12 +1,19 @@
 {
     "name": "@ptolemy2002/list-object-utils",
-    "version": "1.2.5",
-    "main": "index.js",
+    "version": "2.0.0",
+    "private": false,
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "files": [
-        "index.js"
+        "/dist"
     ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Ptolemy2002/list-object-utils",
+      "directory": "lib"
+    },
     "scripts": {
-        "build": "esbuild src/index.js --bundle --format=cjs --outfile=index.js --loader:.js=jsx --external:is-callable",
+        "build": "tsc --project ./tsconfig.json",
         "postinstall": "npx typesync",
         "uninstall": "bash ./scripts/uninstall.sh",
         "reinstall": "bash ./scripts/reinstall.sh",
@@ -19,15 +26,5 @@
         "release-minor": "bash ./scripts/release.sh minor",
         "release-major": "bash ./scripts/release.sh major"
     },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Ptolemy2002/list-object-utils",
-        "directory": "lib"
-    },
-    "description": "Utilities for working with lists and objects",
-    "license": "ISC",
-    "peerDependencies": {},
-    "devDependencies": {
-        "esbuild": "^0.23.0"
-    }
+    "devDependencies": {}
 }

@@ -1,5 +1,7 @@
-export function listsEqual(a, b) {
-    if (!Array.isArray(a) || !Array.isArray(b)) return false;
+type ArrayOptional = any[] | null | undefined;
+type ObjectOptional = Object | null | undefined;
+
+export function listsEqual(a: ArrayOptional, b: ArrayOptional): boolean {
     if (a === b) return true;
     if (!a || !b) return false;
     if (a.length !== b.length) return false;
@@ -17,8 +19,7 @@ export function listsEqual(a, b) {
     return true;
 }
 
-export function objectsEqual(a, b) {
-    if (!(typeof a === "object" && !Array.isArray(a)) || !(typeof b === "object" && !Array.isArray(b))) return false;
+export function objectsEqual(a: ObjectOptional, b: ObjectOptional): boolean {
     if (a === b) return true;
     if (!a || !b) return false;
     if (Object.keys(a).length !== Object.keys(b).length) return false;
@@ -36,7 +37,12 @@ export function objectsEqual(a, b) {
     return true;
 }
 
-export function listSwap(list, i, j) {
+export function listSwap<T>(list: T[], i: number, j: number): T[] {
+    if (i !== Math.floor(i)) throw new TypeError("i must be an integer");
+    if (j !== Math.floor(j)) throw new TypeError("j must be an integer");
+    if (i < 0 || i >= list.length) throw new RangeError("i out of bounds");
+    if (j < 0 || j >= list.length) throw new RangeError("j out of bounds");
+
     const newList = [...list];
     const temp = newList[i];
     newList[i] = newList[j];
@@ -44,23 +50,29 @@ export function listSwap(list, i, j) {
     return newList;
 }
 
-export function listRemove(list, i) {
+export function listRemove<T>(list: T[], i: number): T[] {
+    if (i !== Math.floor(i)) throw new TypeError("i must be an integer");
+    if (i < 0 || i >= list.length) throw new RangeError("i out of bounds");
+
     const newList = [...list];
     newList.splice(i, 1);
     return newList;
 }
 
-export function listPush(list, element) {
-    return [...list, element];
+export function listPush<T>(list: T[], item: T): T[] {
+    return [...list, item];
 }
 
-export function listSet(list, i, element) {
+export function listSet<T>(list: T[], i: number, item: T): T[] {
+    if (i !== Math.floor(i)) throw new TypeError("i must be an integer");
+    if (i < 0 || i >= list.length) throw new RangeError("i out of bounds");
+
     const newList = [...list];
-    newList[i] = element;
+    newList[i] = item;
     return newList;
 }
 
-export function isSet(list) {
+export function isSet(list: any[]): boolean {
     const seen = [];
     for(let i = 0; i < list.length; i++) {
         if (seen.includes(list[i])) return false;
@@ -69,7 +81,7 @@ export function isSet(list) {
     return true;
 }
 
-export function listDifference(a, b) {
+export function listDifference(a: ArrayOptional, b: ArrayOptional): ObjectOptional {
     if (a === b) return {};
     if (!a || !b) return b;
 
@@ -97,7 +109,7 @@ export function listDifference(a, b) {
     return result;
 }
 
-export function objectDifference(a, b) {
+export function objectDifference(a: ObjectOptional, b: ObjectOptional): ObjectOptional {
     if (a === b) return {};
     if (!a || !b) return b;
 
@@ -123,7 +135,7 @@ export function objectDifference(a, b) {
     return result;
 }
 
-export function flattenKeys(obj, prefix="") {
+export function flattenKeys(obj: Object, prefix: string = ""): Object {
     const result = {};
     for (const key in obj) {
         if (Array.isArray(obj[key])) {
@@ -141,10 +153,11 @@ export function flattenKeys(obj, prefix="") {
     return result;
 }
 
-export function sortWithIndeces(toSort, sort=() => 0, descending=false) {
+type SortCallback = (a: number, b: number) => number;
+export function sortWithIndeces<T>(toSort: T[], sort: SortCallback = () => 0, descending: boolean = false): T[] {
     return Array.from(toSort.keys()).sort((a, b) => sort(a, b) * (descending ? -1 : 1)).map((i) => toSort[i]);
 }
 
-export function objectToString(obj) {
+export function objectToString(obj: Object): string {
     return JSON.stringify(obj, (_, v) => v === undefined ? null : v);
 }
