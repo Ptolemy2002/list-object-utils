@@ -1,7 +1,7 @@
 import { ValueOf } from "@ptolemy2002/ts-utils";
 
-type ArrayOptional = any[] | null | undefined;
-type ObjectOptional = Object | null | undefined;
+export type ArrayOptional<T = any> = T[] | null | undefined;
+export type ObjectOptional<T = Object> = T | null | undefined;
 
 export function listsEqual(a: ArrayOptional, b: ArrayOptional): boolean {
     if (a === b) return true;
@@ -83,7 +83,7 @@ export function isSet(list: any[]): boolean {
     return true;
 }
 
-export function listDifference(a: ArrayOptional, b: ArrayOptional): ObjectOptional {
+export function listDifference<T>(a: ArrayOptional<T>, b: ArrayOptional<T>): ObjectOptional<Record<number, T>> {
     if (a === b) return {};
     if (!a || !b) return b;
 
@@ -111,11 +111,17 @@ export function listDifference(a: ArrayOptional, b: ArrayOptional): ObjectOption
     return result;
 }
 
-export function objectDifference(a: ObjectOptional, b: ObjectOptional): ObjectOptional {
+export type ObjectDifferenceResult<T> = {
+    [P in keyof T]?:
+        T[P] extends any[] ? Record<number, ValueOf<T[P]>>
+        : T[P] extends Object ? Record<keyof T[P], ValueOf<T[P]>>
+        : T[P];
+};
+export function objectDifference<T>(a: ObjectOptional<T>, b: ObjectOptional<T>): ObjectOptional<T | ObjectDifferenceResult<T>> {
     if (a === b) return {};
     if (!a || !b) return b;
 
-    const result = {};
+    const result: any = {};
     for (const key in a) {
         if (b[key] !== a[key]) {
             if (Array.isArray(a[key]) && Array.isArray(b[key])) {
@@ -155,7 +161,7 @@ export function flattenKeys<T>(obj: T, prefix: string = ""): Record<string, Valu
     return result;
 }
 
-type SortCallback = (a: number, b: number) => number;
+export type SortCallback = (a: number, b: number) => number;
 export function sortWithIndeces<T>(toSort: T[], sort: SortCallback = () => 0, descending: boolean = false): T[] {
     return Array.from(toSort.keys()).sort((a, b) => sort(a, b) * (descending ? -1 : 1)).map((i) => toSort[i]);
 }

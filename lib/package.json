@@ -1,6 +1,6 @@
 {
     "name": "@ptolemy2002/list-object-utils",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "private": false,
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -29,7 +29,6 @@
     "peerDependencies": {
         "@ptolemy2002/ts-utils": "^1.2.0"
     },
-    
     "devDependencies": {
         "@ptolemy2002/ts-utils": "^1.2.0"
     }

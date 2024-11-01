@@ -11,8 +11,14 @@ const { functionName } = require('@ptolemy2002/list-object-utils');
 
 ## Type Reference
 ```typescript
-type ArrayOptional = any[] | null | undefined;
-type ObjectOptional = Object | null | undefined;
+type ArrayOptional<T = any> = T[] | null | undefined;
+type ObjectOptional<T = Object> = T | null | undefined;
+type ObjectDifferenceResult<T> = {
+    [P in keyof T]?:
+        T[P] extends any[] ? Record<number, ValueOf<T[P]>>
+        : T[P] extends Object ? Record<keyof T[P], ValueOf<T[P]>>
+        : T[P];
+};
 type SortCallback = (a: number, b: number) => number;
 ```
 
@@ -97,27 +103,27 @@ Checks if a list is a set, that is, it has no duplicate elements. Element identi
 #### Returns
 `boolean` - `true` if the list is a set, `false` otherwise.
 
-### listDifference
+### listDifference<T>
 #### Description
 Finds the difference between two lists, that is, the elements that do not match between the two lists. If one list has a different value at an index than the other list at the same index, the element from the second list will be included in the result. Uses recursion to check nested lists and the `objectDifference` function to check nested objects. If either of the operands is not a list, the function will return an empty object if the operands are equal and the second operand if they are not.
 
 #### Parameters
-- `a` (`ArrayOptional`): The first list to be compared.
-- `b` (`ArrayOptional`): The second list to be compared.
+- `a` (`ArrayOptional<T>`): The first list to be compared.
+- `b` (`ArrayOptional<T>`): The second list to be compared.
 
 #### Returns
-`ObjectOptional` - If the operands are both lists, an object with a property for every index at which the two lists differ. The value for each property is the element from the second list. If the operands are not both lists and equal, an empty object. If the operands are not both lists and not equal, the second operand.
+` ObjectOptional<Record<number, T>>` - If the operands are both lists, an object with a property for every index at which the two lists differ. The value for each property is the element from the second list. If the operands are not both lists and equal, an empty object. If the operands are not both lists and not equal, the second operand.
 
-### objectDifference
+### objectDifference<T>
 #### Description
 Finds the difference between two objects, that is, the properties that do not match between the two objects. If one object has a different value for a property than the other object for the same property, the value from the second object will be included in the result. Uses recursion to check nested objects and the `listDifference` function to check nested lists. If either of the operands is not an object, the function will return an empty object if the operands are equal and the second operand if they are not.
 
 #### Parameters
-- `a` (`ObjectOptional`): The first object to be compared.
-- `b` (`ObjectOptional`): The second object to be compared.
+- `a` (`ObjectOptional<T>`): The first object to be compared.
+- `b` (`ObjectOptional<T>`): The second object to be compared.
 
 #### Returns
-`ObjectOptional` - If the operands are both objects, an object with a property for every key at which the two objects differ. The value for each property is the value from the second object. If the operands are not both objects and equal, an empty object. If the operands are not both objects and not equal, the second operand.
+`ObjectOptional<T | ObjectDifferenceResult<T>>` - If the operands are both objects, an object with a property for every key at which the two objects differ. The value for each property is the value from the second object. If the operands are not both objects and equal, an empty object. If the operands are not both objects and not equal, the second operand.
 
 ### flattenKeys<T>
 #### Description
