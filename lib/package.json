@@ -8,9 +8,9 @@
         "/dist"
     ],
     "repository": {
-      "type": "git",
-      "url": "https://github.com/Ptolemy2002/list-object-utils",
-      "directory": "lib"
+        "type": "git",
+        "url": "https://github.com/Ptolemy2002/list-object-utils",
+        "directory": "lib"
     },
     "scripts": {
         "build": "tsc --project ./tsconfig.json",
@@ -26,5 +26,11 @@
         "release-minor": "bash ./scripts/release.sh minor",
         "release-major": "bash ./scripts/release.sh major"
     },
-    "devDependencies": {}
+    "peerDependencies": {
+        "@ptolemy2002/ts-utils": "^1.2.0"
+    },
+    
+    "devDependencies": {
+        "@ptolemy2002/ts-utils": "^1.2.0"
+    }
 }

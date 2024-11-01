@@ -1,3 +1,5 @@
+import { ValueOf } from "@ptolemy2002/ts-utils";
+
 type ArrayOptional = any[] | null | undefined;
 type ObjectOptional = Object | null | undefined;
 
@@ -135,7 +137,7 @@ export function objectDifference(a: ObjectOptional, b: ObjectOptional): ObjectOp
     return result;
 }
 
-export function flattenKeys(obj: Object, prefix: string = ""): Object {
+export function flattenKeys<T>(obj: T, prefix: string = ""): Record<string, ValueOf<T>> {
     const result = {};
     for (const key in obj) {
         if (Array.isArray(obj[key])) {

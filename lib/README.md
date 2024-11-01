@@ -119,18 +119,18 @@ Finds the difference between two objects, that is, the properties that do not ma
 #### Returns
 `ObjectOptional` - If the operands are both objects, an object with a property for every key at which the two objects differ. The value for each property is the value from the second object. If the operands are not both objects and equal, an empty object. If the operands are not both objects and not equal, the second operand.
 
-### flattenKeys
+### flattenKeys<T>
 #### Description
 For an object that contains properties that are also objects, this function will flatten the keys of the object to a single level. The keys will be concatenated with a period (`.`) between them. Also does this with lists. Uses recursion to flatten nested objects.
 
 Note that empty lists and empty objects are left as-is.
 
 #### Parameters
-- `obj` (`Object`): The object to be flattened.
+- `obj` (`T`): The object to be flattened.
 - `prefix` (`string`): The prefix to be added to the keys. Default is an empty string.
 
 #### Returns
-`Object` - The object with the keys flattened.
+`Record<string, ValueOf<T>>` - The object with the keys flattened.
 
 ### sortWithIndices<T>
 #### Description
@@ -155,7 +155,7 @@ A simple implementation of `JSON.stringify` that converts undefined values to `n
 `string` - The string representation of the object.
 
 ## Peer Dependencies
-This project does not have any peer dependencies, so it should work out of the box.
+- @ptolemy2002/ts-utils^1.2.0
 
 ## Commands
 The following commands exist in the project:
