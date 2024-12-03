@@ -161,7 +161,7 @@ A simple implementation of `JSON.stringify` that converts undefined values to `n
 `string` - The string representation of the object.
 
 ## Peer Dependencies
-- @ptolemy2002/ts-utils^1.2.0
+- @ptolemy2002/ts-utils^2.0.0
 
 ## Commands
 The following commands exist in the project:

@@ -27,9 +27,9 @@
         "release-major": "bash ./scripts/release.sh major"
     },
     "peerDependencies": {
-        "@ptolemy2002/ts-utils": "^1.2.0"
+        "@ptolemy2002/ts-utils": "^2.0.0"
     },
     "devDependencies": {
-        "@ptolemy2002/ts-utils": "^1.2.0"
+        "@ptolemy2002/ts-utils": "^2.0.0"
     }
 }
