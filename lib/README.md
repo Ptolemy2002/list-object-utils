@@ -160,6 +160,30 @@ A simple implementation of `JSON.stringify` that converts undefined values to `n
 #### Returns
 `string` - The string representation of the object.
 
+### listClone<T>
+#### Description
+Clones a list. Uses recursion to clone nested lists and the `objectClone` function to clone nested objects.
+
+#### Parameters
+- `list` (`T[]`): The list to be cloned.
+- `maxDepth` (`number`): The maximum depth to which the list should be cloned. Default is `Infinity`.
+- `currentDepth` (`number`): The current depth of the list. This should not be specified on the initial call, and is only used for recursion purposes. Default is `0`.
+
+#### Returns
+`T[]` - The cloned list.
+
+### objectClone<T>
+#### Description
+Clones an object. Uses recursion to clone nested objects and the `listClone` function to clone nested lists.
+
+#### Parameters
+- `obj` (`T`): The object to be cloned.
+- `maxDepth` (`number`): The maximum depth to which the object should be cloned. Default is `Infinity`.
+- `currentDepth` (`number`): The current depth of the object. This should not be specified on the initial call, and is only used for recursion purposes. Default is `0`.
+
+#### Returns
+`T` - The cloned object.
+
 ## Peer Dependencies
 - @ptolemy2002/ts-utils^2.0.0
 
