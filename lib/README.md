@@ -186,6 +186,7 @@ Clones an object. Uses recursion to clone nested objects and the `listClone` fun
 
 ## Peer Dependencies
 - @ptolemy2002/ts-utils^2.0.0
+- is-callable^1.2.7
 
 ## Commands
 The following commands exist in the project:
