@@ -1,5 +1,6 @@
 import { ValueOf } from "@ptolemy2002/ts-utils";
 import isCallable from "is-callable";
+import cloneDeep from "lodash.clonedeep";
 
 export type ArrayOptional<T = any> = T[] | null | undefined;
 export type ObjectOptional<T = Object> = T | null | undefined;
@@ -169,32 +170,4 @@ export function sortWithIndeces<T>(toSort: T[], sort: SortCallback = () => 0, de
 
 export function objectToString(obj: Object): string {
     return JSON.stringify(obj, (_, v) => v === undefined ? null : v);
-}
-
-export function listClone<T>(list: T[], maxDepth=Infinity, depth=0): T[] {
-    if (depth >= maxDepth) return list;
-    return list.map((item) => {
-        if (Array.isArray(item)) return listClone(item, maxDepth, depth + 1);
-        if (typeof item === "object") return objectClone(item, maxDepth, depth + 1);
-        return item;
-    }) as T[];
-}
-
-export function objectClone<T>(obj: T, maxDepth=Infinity, depth=0): T {
-    if (depth >= maxDepth) return obj;
-    if (obj instanceof Date) return new Date(obj.getTime()) as unknown as T;
-
-    return Object.keys(obj).reduce((acc, key) => {
-        const value = obj[key];
-        if (Array.isArray(value)) {
-            acc[key] = listClone(value, maxDepth, depth + 1);
-        } else if (isCallable(value.clone)) {
-            acc[key] = value.clone();
-        } else if (typeof value === "object") {
-            acc[key] = objectClone(value, maxDepth, depth + 1);
-        } else {
-            acc[key] = value;
-        }
-        return acc;
-    }, {} as T);
 }
