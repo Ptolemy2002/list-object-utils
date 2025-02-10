@@ -164,7 +164,7 @@ A simple implementation of `JSON.stringify` that converts undefined values to `n
 `T` - The cloned object.
 
 ## Peer Dependencies
-- @ptolemy2002/ts-utils^2.0.0
+- @ptolemy2002/ts-utils^3.0.0
 - is-callable^1.2.7
 
 ## Commands
