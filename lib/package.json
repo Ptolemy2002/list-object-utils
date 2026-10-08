@@ -26,13 +26,12 @@
         "release-minor": "bash ./scripts/release.sh minor",
         "release-major": "bash ./scripts/release.sh major"
     },
-    "peerDependencies": {
-        "@ptolemy2002/ts-utils": "^3.0.0",
-        "is-callable": "^1.2.7"
+    "dependencies": {
+        "@ptolemy2002/ts-utils": "^4.0.0",
+        "is-callable": "^1.2.7",
+        "lodash.clonedeep": "^4.5.0"
     },
     "devDependencies": {
-        "@ptolemy2002/ts-utils": "^3.0.0",
-        "@types/is-callable": "^1.1.2",
-        "is-callable": "^1.2.7"
+        "@types/is-callable": "^1.1.2"
     }
 }
