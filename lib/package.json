@@ -1,6 +1,6 @@
 {
     "name": "@ptolemy2002/list-object-utils",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "private": false,
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -32,6 +32,7 @@
         "lodash.clonedeep": "^4.5.0"
     },
     "devDependencies": {
-        "@types/is-callable": "^1.1.2"
+        "@types/is-callable": "^1.1.2",
+        "@types/lodash.clonedeep": "~4.5.9"
     }
 }
